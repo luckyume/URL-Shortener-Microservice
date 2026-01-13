@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
-var bodyParser = require('body-parser')
 const app = express();
 
 const map = new Map();
@@ -11,7 +10,7 @@ const map = new Map();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }))
 app.use('/public', express.static(`${process.cwd()}/public`));
 
 app.get('/', function (req, res) {
@@ -34,7 +33,7 @@ app.post('/api/shorturl', function (req, res) {
     });
   }
 
-  const mapLength = map.keys.length;
+  const mapLength = map.size;
   const key = `${mapLength + 1}`;
   map.set(key, url);
 
